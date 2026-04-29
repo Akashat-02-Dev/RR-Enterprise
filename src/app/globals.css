@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Your requested color palette */
+  --color-eco-100: #e8fccf;
+  --color-eco-200: #96e072;
+  --color-eco-300: #3da35d;
+  --color-eco-400: #3e8914;
+  --color-eco-500: #134611;
+
+  /* Your requested fonts injected from Next.js */
+  --font-alegreya: var(--font-alegreya), serif;
+  --font-nunito: var(--font-nunito), sans-serif;
+  --font-poppins: var(--font-poppins), sans-serif;
+
+  /* Apple-style soft shadows */
+  --shadow-apple: 0 8px 32px 0 rgba(19, 70, 17, 0.08);
+  --shadow-apple-hover: 0 12px 48px 0 rgba(19, 70, 17, 0.12);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* =========================================
+   Base Layout & Scrollbar
+   ========================================= */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: var(--color-eco-100);
+    color: var(--color-eco-500);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  ::selection {
+    background-color: var(--color-eco-300);
+    color: white;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-eco-100);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-eco-200);
+  border-radius: 20px;
+  border: 3px solid var(--color-eco-100);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-eco-300);
+}
+
+/* =========================================
+   Hero Section Animations
+   ========================================= */
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.animate-blob {
+  animation: blob 7s infinite alternate ease-in-out;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
 }
