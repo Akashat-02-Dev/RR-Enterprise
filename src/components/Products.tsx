@@ -44,9 +44,9 @@ export default function Products() {
       
       {/* Header */}
       <div className="max-w-7xl mx-auto px-6 text-center mb-8 md:mb-16 relative z-20">
-        <h2 className="font-alegreya text-5xl md:text-6xl font-bold text-eco-500 mb-4 tracking-tight">Ecosystem Setup</h2>
+        <h2 className="font-alegreya text-5xl md:text-6xl font-bold text-eco-500 mb-4 tracking-tight">Our Product Ranges</h2>
         <p className="font-nunito text-xl text-eco-400 max-w-2xl mx-auto">
-          Explore our expansive portfolio in a continuous 3D orbital view.
+          Explore our products.
         </p>
       </div>
 
