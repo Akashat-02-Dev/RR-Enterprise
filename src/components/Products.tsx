@@ -61,13 +61,14 @@ export default function Products() {
       >
         
         {/* Central Hub Logo (The Fixed Point) */}
-        <div className="absolute z-50 flex flex-col items-center justify-center w-32 h-32 md:w-48 md:h-48 bg-white/50 backdrop-blur-3xl rounded-full shadow-[0_0_60px_rgba(61,163,93,0.3)] border border-white/80 animate-pulse transition-transform hover:scale-105 duration-500 cursor-pointer">
-          <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-eco-300 to-eco-500 rounded-full flex items-center justify-center shadow-inner mb-2">
-            <Leaf className="w-8 h-8 md:w-10 md:h-10 text-white" />
-          </div>
-          <span className="font-poppins font-bold text-sm md:text-md text-eco-500 tracking-wider">RR ENT.</span>
+{/* Central Hub Logo (The Fixed Point) */}
+        <div className="absolute z-50 flex items-center justify-center w-32 h-32 md:w-48 md:h-48 bg-eco-500 backdrop-blur-3xl rounded-full shadow-[0_0_60px_rgba(199,172,103,0.4)] border border-eco-200/60 animate-[pulse_4s_ease-in-out_infinite] transition-transform hover:scale-105 duration-500 cursor-pointer p-6">
+          <img 
+            src="/R&R Enterprise Logo.png" 
+            alt="R&R Enterprise Logo" 
+            className="w-full h-full object-contain drop-shadow-md"
+          />
         </div>
-
         {/* Orbiting Cards */}
         {categories.map((category, idx) => {
           // 1. Calculate the angle for this specific card

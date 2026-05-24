@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Alegreya, Nunito, Poppins } from "next/font/google";
-// CRITICAL: This import must exist for Tailwind to work
+import { Gelasio, Nunito, Montserrat, Roboto } from "next/font/google";
 import "./globals.css";
 
-const alegreya = Alegreya({ subsets: ["latin"], variable: "--font-alegreya" });
+const gelasio = Gelasio({ subsets: ["latin"], variable: "--font-gelasio" });
 const nunito = Nunito({ subsets: ["latin"], variable: "--font-nunito" });
-const poppins = Poppins({ weight: ["400", "500", "600", "700"], subsets: ["latin"], variable: "--font-poppins" });
+const montserrat = Montserrat({ weight: ["400", "500", "600", "700"], subsets: ["latin"], variable: "--font-montserrat" });
+const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], variable: "--font-roboto" });
 
 export const metadata: Metadata = {
-  title: "EcoExport | Premium Sustainability",
+  title: "RR Enterprise | Premium Sustainability",
   description: "Bulk customizable eco-friendly jute and bamboo products.",
 };
 
@@ -17,7 +17,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${alegreya.variable} ${nunito.variable} ${poppins.variable} font-nunito bg-eco-100 text-eco-500 antialiased`}>
+      <body className={`${gelasio.variable} ${nunito.variable} ${montserrat.variable} ${roboto.variable} font-nunito bg-eco-100 text-eco-500 antialiased`}>
         {children}
       </body>
     </html>
