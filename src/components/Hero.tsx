@@ -1,14 +1,15 @@
-import Image from "next/image";
-import HeroBG from '../../public/hero-bg.png';
+import Image from "next/image"; // IMPORT REQUIRED
+import HeroBG from '../../public/hero-bg.png'
 
 export default function Hero() {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Optimized Next.js Image with 'priority' for instant loading */}
+      
+      {/* OPTIMIZED HERO BACKGROUND */}
       <div className="absolute inset-0">
         <Image 
           src={HeroBG} 
-          alt="Nature Background" 
+          alt="Eco Export Hero Background" 
           fill 
           priority 
           quality={90}
@@ -16,6 +17,7 @@ export default function Hero() {
           sizes="100vw"
         />
       </div>
+      
       <div className="absolute inset-0 bg-eco-500/50 backdrop-blur-[4px]" />
 
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center gap-6 mt-16">
@@ -31,10 +33,9 @@ export default function Hero() {
           Premium, eco-friendly jute and bamboo products tailored for bulk global enterprise needs.
         </p>
         
-        {/* Call to Action featuring the professional navy to orange accent gradient */}
         <a 
           href="#products" 
-          className="mt-6 px-10 py-4 bg-gradient-to-r from-accent-navy to-accent-orange text-white rounded-full font-montserrat font-bold transition-all duration-500 transform hover:scale-105 shadow-[0_4px_30px_rgba(236,105,23,0.35)] border border-white/20"
+          className="mt-6 px-10 py-4 bg-gradient-to-r from-accent-navy to-accent-orange text-white rounded-full font-montserrat font-bold transition-all duration-500 transform hover:scale-105 shadow-[0_4px_30px_rgba(236,105,23,0.35)] border border-white/20 hover:from-eco-200 hover:to-eco-300"
         >
           Explore Our Catalog
         </a>
