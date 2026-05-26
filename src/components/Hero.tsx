@@ -1,12 +1,21 @@
-import HeroBG from '../../public/hero-bg.png'
+import Image from "next/image";
+import HeroBG from '../../public/hero-bg.png';
 
 export default function Hero() {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${HeroBG.src})` }}
-      />
+      {/* Optimized Next.js Image with 'priority' for instant loading */}
+      <div className="absolute inset-0">
+        <Image 
+          src={HeroBG} 
+          alt="Nature Background" 
+          fill 
+          priority 
+          quality={90}
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+      </div>
       <div className="absolute inset-0 bg-eco-500/50 backdrop-blur-[4px]" />
 
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center gap-6 mt-16">
@@ -14,19 +23,18 @@ export default function Hero() {
           Sustainable & Customizable Bulk Export
         </span>
         
-        {/* Utilizing Gelasio for the luxury heading font */}
         <h1 className="font-gelasio text-5xl md:text-7xl font-bold text-white leading-tight">
           Nature's Strength,<br /> <span className="text-eco-200">Crafted for the World.</span>
         </h1>
         
-        {/* Utilizing Roboto for clean sub-body text */}
         <p className="font-roboto text-lg md:text-xl text-white/90 max-w-2xl font-light">
           Premium, eco-friendly jute and bamboo products tailored for bulk global enterprise needs.
         </p>
         
-<a 
+        {/* Call to Action featuring the professional navy to orange accent gradient */}
+        <a 
           href="#products" 
-          className="mt-6 px-10 py-4 bg-gradient-to-r from-eco-300 to-eco-200 text-eco-500 rounded-full font-montserrat font-bold transition-all duration-500 transform hover:scale-105 shadow-[0_4px_30px_rgba(199,172,103,0.35)] border border-eco-200/50 hover:from-eco-200 hover:to-eco-300"
+          className="mt-6 px-10 py-4 bg-gradient-to-r from-accent-navy to-accent-orange text-white rounded-full font-montserrat font-bold transition-all duration-500 transform hover:scale-105 shadow-[0_4px_30px_rgba(236,105,23,0.35)] border border-white/20"
         >
           Explore Our Catalog
         </a>

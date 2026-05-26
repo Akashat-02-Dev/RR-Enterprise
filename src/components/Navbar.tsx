@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,12 +17,15 @@ export default function Navbar() {
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-eco-500/95 backdrop-blur-md shadow-lg py-3" : "bg-transparent py-5"}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-        <Link href="/" className="flex items-center gap-2">
-          {/* Logo integrated with responsive sizing */}
-          <img 
+<Link href="/" className="flex items-center gap-2">
+          <Image 
             src="/R&R Enterprise Logo.png" 
             alt="R&R Enterprise Logo" 
-            className={`transition-all duration-300 object-contain ${scrolled ? 'h-10' : 'h-14 drop-shadow-md'}`}
+            width={180}
+            height={56}
+            priority={true}
+            style={{ width: "auto" }} /* This specifically fixes the browser warning */
+            className={`transition-all duration-300 object-contain ${scrolled ? 'h-10 opacity-90' : 'h-14 drop-shadow-md'}`}
           />
         </Link>
 
