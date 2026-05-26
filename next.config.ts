@@ -1,11 +1,14 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   images: {
-    qualities: [75, 90], // Add this line to allow quality={90} in Hero.tsx
+    qualities: [75, 90],
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
+        // The 'as const' or explicit type assertion is the magic fix 
+        // that prevents the deployment build from crashing.
+        protocol: "https" as "https", 
+        hostname: "images.unsplash.com",
       },
     ],
   },
