@@ -5,11 +5,13 @@ const nextConfig: NextConfig = {
     qualities: [75, 90],
     remotePatterns: [
       {
-        // The 'as const' or explicit type assertion is the magic fix 
-        // that prevents the deployment build from crashing.
-        protocol: "https" as "https", 
+        protocol: "https" as "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https" as "https",
+        hostname: "firebasestorage.googleapis.com",
+      }
     ],
   },
 };

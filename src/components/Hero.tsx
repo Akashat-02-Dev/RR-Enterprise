@@ -35,7 +35,7 @@ export default function Hero() {
         
         <a 
           href="#products" 
-          className="mt-6 px-10 py-4 bg-gradient-to-r from-accent-navy to-accent-orange text-white rounded-full font-montserrat font-bold transition-all duration-500 transform hover:scale-105 shadow-[0_4px_30px_rgba(236,105,23,0.35)] border border-white/20 hover:from-eco-200 hover:to-eco-300"
+          className="mt-6 px-10 py-4 bg-gradient-to-r from-eco-500 to-eco-400 text-white rounded-full font-montserrat font-bold transition-all duration-500 transform hover:scale-105 shadow-[0_4px_30px_rgba(236,105,23,0.35)] border border-white/20 hover:from-eco-200 hover:to-eco-300"
         >
           Explore Our Catalog
         </a>
