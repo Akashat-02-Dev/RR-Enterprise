@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import Image, { StaticImageData } from "next/image"; 
+import Link from "next/link"; // Added Link for optimized Next.js routing
 
 type Category = {
   title: string;
@@ -22,6 +23,14 @@ export default function Products() {
   const rotationRef = useRef(0);
   const isPausedRef = useRef(false);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Function to elegantly scroll back to the top
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
 
   useEffect(() => {
     let animationId: number;
@@ -66,7 +75,12 @@ export default function Products() {
         className="relative w-full h-[600px] md:h-[800px] flex items-center justify-center"
         style={{ "--radius-x": "clamp(160px, 35vw, 450px)", "--radius-y": "clamp(100px, 20vw, 240px)" } as React.CSSProperties}
       >
-        <div className="absolute z-50 flex items-center justify-center w-32 h-32 md:w-48 md:h-48 bg-eco-500 backdrop-blur-3xl rounded-full shadow-[0_0_60px_rgba(199,172,103,0.4)] border border-eco-200/60 animate-[pulse_4s_ease-in-out_infinite] transition-transform hover:scale-105 duration-500 cursor-pointer p-6">
+        {/* Center Logo with Scroll to Top functionality */}
+        <div 
+          onClick={scrollToTop}
+          className="absolute z-50 flex items-center justify-center w-32 h-32 md:w-48 md:h-48 bg-eco-200 backdrop-blur-3xl rounded-full shadow-[0_0_60px_rgba(199,172,103,0.4)] border border-eco-200/60 animate-[pulse_4s_ease-in-out_infinite] transition-transform hover:scale-105 duration-500 cursor-pointer p-6"
+          title="Scroll to Top"
+        >
           <div className="relative w-full h-full">
             <Image src="/R&R Enterprise Logo.png" alt="R&R Enterprise Logo" fill sizes="(max-width: 768px) 128px, 192px" className="object-contain drop-shadow-md" />
           </div>
@@ -81,7 +95,11 @@ export default function Products() {
             className="absolute group cursor-pointer"
             style={{ opacity: 0 }} // Initial hidden state before JS kicks in
           >
-            <div className="w-[180px] sm:w-[240px] md:w-[280px] bg-white/60 backdrop-blur-2xl rounded-[2rem] p-2 md:p-3 shadow-apple border border-white/80 flex flex-col group-hover:bg-white/80 group-hover:shadow-apple-hover transition-all duration-300 transform group-hover:-translate-y-2">
+            {/* Wrapped the card content in a Link to redirect to the shop */}
+            <Link 
+              href="/shop" 
+              className="block w-[180px] sm:w-[240px] md:w-[280px] bg-white/60 backdrop-blur-2xl rounded-[2rem] p-2 md:p-3 shadow-apple border border-white/80 flex flex-col group-hover:bg-white/80 group-hover:shadow-apple-hover transition-all duration-300 transform group-hover:-translate-y-2"
+            >
               <div className="aspect-[4/3] overflow-hidden rounded-[1.5rem] relative bg-eco-100">
                 <div className="absolute inset-0 bg-eco-500/10 z-10 group-hover:bg-transparent transition-colors duration-500" />
                 <Image src={category.img} alt={category.title} fill sizes="(max-width: 768px) 240px, 280px" className="object-cover transform group-hover:scale-110 transition-transform duration-700 pointer-events-none" />
@@ -90,7 +108,7 @@ export default function Products() {
                 <h3 className="font-poppins font-semibold text-lg md:text-xl text-eco-500 mb-1 leading-tight">{category.title}</h3>
                 <p className="font-nunito text-eco-500/80 text-xs md:text-sm hidden sm:block">{category.desc}</p>
               </div>
-            </div>
+            </Link>
           </div>
         ))}
       </div>

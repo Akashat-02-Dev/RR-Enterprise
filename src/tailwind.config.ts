@@ -10,11 +10,11 @@ const config: Config = {
     extend: {
       colors: {
         eco: {
-          100: '#f4f0e6', // Softest beige derived for readable backgrounds
-          200: '#c7ac67', // Light Gold
-          300: '#93835e', // Dark Gold/Bronze
-          400: '#344838', // Medium Green
-          500: '#0d1a12', // Dark Green
+          100: '#d3ffad', // Softest green (Replaces beige for backgrounds)
+          200: '#84b45b', // Light organic green
+          300: '#396f3d', // Vibrant medium green
+          400: '#405e40', // Muted slate green
+          500: '#014108', // Darkest forest green (Replaces dark green/black)
         },
         accent: {
           orange: '#ec6917',
@@ -28,8 +28,9 @@ const config: Config = {
         roboto: ['var(--font-roboto)', 'sans-serif'],
       },
       boxShadow: {
-        'apple': '0 8px 32px 0 rgba(43, 63, 50, 0.12)',
-        'apple-hover': '0 12px 48px 0 rgba(43, 63, 50, 0.20)',
+        // Redesigned shadow to match the new #014108 (RGB: 1, 65, 8) dark green base
+        'apple': '0 8px 32px 0 rgba(1, 65, 8, 0.12)',
+        'apple-hover': '0 12px 48px 0 rgba(1, 65, 8, 0.20)',
       }
     },
   },

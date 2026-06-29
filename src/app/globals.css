@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-eco-100: #f4f0e6;
-  --color-eco-200: #c7ac67;
-  --color-eco-300: #93835e;
-  --color-eco-400: #344838;
-  --color-eco-500: #0d1a12;
+  --color-eco-100: #d3ffad;
+  --color-eco-200: #84b45b;
+  --color-eco-300: #396f3d;
+  --color-eco-400: #405e40;
+  --color-eco-500: #014108;
   
   --color-accent-orange: #ec6917;
   --color-accent-navy: #063c60;
@@ -15,8 +15,9 @@
   --font-montserrat: var(--font-montserrat), sans-serif;
   --font-roboto: var(--font-roboto), sans-serif;
 
-  --shadow-apple: 0 8px 32px 0 rgba(43, 63, 50, 0.12);
-  --shadow-apple-hover: 0 12px 48px 0 rgba(43, 63, 50, 0.20);
+  /* Matches the updated rgba values for the new dark green */
+  --shadow-apple: 0 8px 32px 0 rgba(1, 65, 8, 0.12);
+  --shadow-apple-hover: 0 12px 48px 0 rgba(1, 65, 8, 0.20);
 }
 
 @layer base {

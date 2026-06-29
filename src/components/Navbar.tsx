@@ -21,31 +21,30 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-eco-500/95 backdrop-blur-md shadow-lg py-3" : "bg-transparent py-5"}`}>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-eco-200/95 backdrop-blur-md shadow-lg py-3" : "bg-transparent py-5"}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-        
-        <Link href="/" className="flex items-center gap-2">
+<Link href="/" className="flex items-center gap-2">
           {/* The parent div controls the size transitions */}
-          <div className={`relative transition-all duration-300 ${scrolled ? 'w-[128px] h-10' : 'w-[180px] h-14'}`}>
+          <div className={`relative transition-all duration-300 ${scrolled ? 'w-[200px] h-14' : 'w-[320px] h-20'}`}>
             <Image 
               src="/R&R Enterprise Logo.png" 
               alt="R&R Enterprise Logo" 
               fill
               priority
-              sizes="(max-width: 768px) 150px, 180px"
+              // Updated sizes to reflect the new larger maximum width
+              sizes="(max-width: 768px) 300px, 320px"
               /* Removed style={{ width: "auto" }} to fix the crash. object-contain handles the aspect ratio instead! */
               className="object-contain drop-shadow-md"
             />
           </div>
         </Link>
-
         {/* Desktop Nav */}
         <div className="hidden md:flex gap-8 font-montserrat text-sm font-semibold">
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
               href={link.path} 
-              className={`${scrolled ? "text-eco-200 hover:text-eco-300" : "text-white hover:text-eco-200"} transition-colors drop-shadow-sm`}
+              className={`${scrolled ? "text-eco-400 hover:text-eco-300" : "text-white hover:text-eco-400"} transition-colors drop-shadow-sm`}
             >
               {link.name}
             </Link>
