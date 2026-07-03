@@ -1,19 +1,26 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+const config: NextConfig = {
   images: {
+    // Add this line to allow quality={90} without Next.js warnings
     qualities: [75, 90],
     remotePatterns: [
       {
-        protocol: "https" as "https",
-        hostname: "images.unsplash.com",
+        protocol: 'https',
+        hostname: 'images.unsplash.com', 
       },
       {
-        protocol: "https" as "https",
-        hostname: "firebasestorage.googleapis.com",
+        protocol: 'https',
+        hostname: 'rnrenterprise.co.in', 
+        pathname: '/**', 
+      },
+      {
+        protocol: 'https',
+        hostname: 'firebasestorage.googleapis.com',
+        pathname: '/**',
       }
     ],
   },
 };
 
-export default nextConfig;
+export default config;

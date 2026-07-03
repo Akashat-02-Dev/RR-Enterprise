@@ -26,3 +26,16 @@ export async function getProducts(): Promise<Product[]> {
     return [];
   }
 }
+export async function getProductById(id: string): Promise<Product | null> {
+  try {
+    const docRef = doc(db, "products", id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return { id: docSnap.id, ...docSnap.data() } as Product;
+    }
+    return null;
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    return null;
+  }
+}

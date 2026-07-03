@@ -18,7 +18,7 @@ export default function Hero() {
         />
       </div>
       
-      <div className="absolute inset-0 bg-eco-500/50 backdrop-blur-[4px]" />
+      <div className="absolute inset-0 bg-eco-500/30 backdrop-blur-[4px]" />
 
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center gap-6 mt-16">
         <span className="px-5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-eco-100 text-sm font-montserrat font-medium border border-white/20">

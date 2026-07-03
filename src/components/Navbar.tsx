@@ -24,16 +24,14 @@ export default function Navbar() {
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-eco-200/95 backdrop-blur-md shadow-lg py-3" : "bg-transparent py-5"}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
 <Link href="/" className="flex items-center gap-2">
-          {/* The parent div controls the size transitions */}
-          <div className={`relative transition-all duration-300 ${scrolled ? 'w-[200px] h-14' : 'w-[320px] h-20'}`}>
+{/* Reduced sizes: unscrolled is now w-[260px] h-16, scrolled is w-[180px] h-12 */}
+          <div className={`relative transition-all duration-300 ${scrolled ? 'w-[180px] h-12' : 'w-[260px] h-16'}`}>
             <Image 
-              src="/R&R Enterprise Logo.png" 
-              alt="R&R Enterprise Logo" 
+              src="/rr-enterprise-logo.png" // Ensure this matches your URL-safe filename
+              alt="RR Enterprise Logo" 
               fill
               priority
-              // Updated sizes to reflect the new larger maximum width
-              sizes="(max-width: 768px) 300px, 320px"
-              /* Removed style={{ width: "auto" }} to fix the crash. object-contain handles the aspect ratio instead! */
+              sizes="(max-width: 768px) 260px, 260px"
               className="object-contain drop-shadow-md"
             />
           </div>

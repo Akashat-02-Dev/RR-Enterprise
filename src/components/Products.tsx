@@ -82,7 +82,7 @@ export default function Products() {
           title="Scroll to Top"
         >
           <div className="relative w-full h-full">
-            <Image src="/R&R Enterprise Logo.png" alt="R&R Enterprise Logo" fill sizes="(max-width: 768px) 128px, 192px" className="object-contain drop-shadow-md" />
+            <Image src="/rr-enterprise-logo.png" alt="R&R Enterprise Logo" fill sizes="(max-width: 768px) 128px, 192px" className="object-contain drop-shadow-md" />
           </div>
         </div>
 
