@@ -7,7 +7,7 @@ export interface Product {
   description: string;
   price: string | number;
   rating: number;
-  imageUrl?: string | string[]; 
+  imageUrl?: string | string[]; // Can be a string or array of strings from Firebase
   badge?: string;
   category: string;
   material?: string; 
@@ -16,37 +16,24 @@ export interface Product {
   stock?: number | ''; 
 }
 
-export const HOSTINGER_DOMAIN = "https://rnrenterprise.co.in";
-// EXPORT THIS so other components can use it for the onError handler
 export const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1611077544831-29002241eec7?auto=format&fit=crop&q=80&w=800";
 
-export function generateProductSlug(productName: string): string {
-  if (!productName) return 'default-product';
-  return productName
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w\-]+/g, '')
-    .replace(/\-\-+/g, '-');
-}
-
+// --- CLEAN FIREBASE IMAGE RESOLVER ---
 export function resolveImageUrl(product: Product): string {
-  if (!product) return FALLBACK_IMAGE;
+  if (!product || !product.imageUrl) return FALLBACK_IMAGE;
 
+  // Extract the first image if Firebase stored it as an array
   const explicitImage = Array.isArray(product.imageUrl) ? product.imageUrl[0] : product.imageUrl;
   
-  if (explicitImage && explicitImage.trim() !== '') {
+  // Validate and return the exact Firebase URL
+  if (explicitImage && typeof explicitImage === 'string' && explicitImage.trim() !== '') {
     if (explicitImage.startsWith('http')) {
+      return explicitImage; // Returns the exact Firebase Storage URL with all tokens intact
+    }
+    // If you happen to have a local path like "/product_images/x.png", allow it
+    if (explicitImage.startsWith('/')) {
       return explicitImage;
     }
-    const cleanPath = explicitImage.replace(/^\/?(product_images\/)?/, '');
-    return `${HOSTINGER_DOMAIN}/product_images/${cleanPath}`;
-  }
-
-  if (product.name) {
-    const slug = generateProductSlug(product.name);
-    return `${HOSTINGER_DOMAIN}/product_images/${slug}-front.webp`;
   }
 
   return FALLBACK_IMAGE;

@@ -7,10 +7,9 @@ import { Product, resolveImageUrl, FALLBACK_IMAGE } from '@/data/shopData';
 export default function ShopProductCard({ product }: { product: Product }) {
   const [isLoaded, setIsLoaded] = useState(false);
   
-  // Initialize state with the resolved URL
+  // Resolves the exact Firebase URL from the DB
   const [imgSrc, setImgSrc] = useState(resolveImageUrl(product));
 
-  // If the product prop changes (e.g., during filtering), reset the image source
   useEffect(() => {
     setImgSrc(resolveImageUrl(product));
   }, [product]);
@@ -30,13 +29,14 @@ export default function ShopProductCard({ product }: { product: Product }) {
             src={imgSrc} 
             alt={product.name || 'Product'} 
             fill
-            unoptimized={true} // CRITICAL: Bypasses Next.js proxy blocking on Hostinger
+            // CRITICAL: This ensures the Firebase URL is used exactly as-is, preventing 404 token errors
+            unoptimized={true} 
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className={`object-cover object-center transition-all duration-700 ease-out group-hover:scale-110 ${
               isLoaded ? 'blur-0 opacity-100' : 'blur-xl opacity-0'
             }`}
             onLoad={() => setIsLoaded(true)}
-            // CRITICAL: If Hostinger returns 404, gracefully swap to the fallback
+            // Fallback UI if a specific Firebase image gets deleted
             onError={() => {
               setImgSrc(FALLBACK_IMAGE);
               setIsLoaded(true);
