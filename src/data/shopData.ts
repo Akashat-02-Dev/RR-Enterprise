@@ -17,26 +17,23 @@ export interface Product {
 }
 
 export const HOSTINGER_DOMAIN = "https://rnrenterprise.co.in";
-const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1611077544831-29002241eec7?auto=format&fit=crop&q=80&w=800";
+// EXPORT THIS so other components can use it for the onError handler
+export const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1611077544831-29002241eec7?auto=format&fit=crop&q=80&w=800";
 
-// --- ADDED: Professional URL Slug Generator ---
 export function generateProductSlug(productName: string): string {
   if (!productName) return 'default-product';
   return productName
     .toString()
     .toLowerCase()
     .trim()
-    .replace(/\s+/g, '-')           // Replace spaces with -
-    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-    .replace(/\-\-+/g, '-');        // Replace multiple - with single -
+    .replace(/\s+/g, '-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-');
 }
 
-// --- UPDATED: Dynamic Predictive Image Resolver ---
-// Now accepts the whole Product object to predict missing images
 export function resolveImageUrl(product: Product): string {
   if (!product) return FALLBACK_IMAGE;
 
-  // 1. Check if an image is explicitly defined in the database
   const explicitImage = Array.isArray(product.imageUrl) ? product.imageUrl[0] : product.imageUrl;
   
   if (explicitImage && explicitImage.trim() !== '') {
@@ -47,11 +44,8 @@ export function resolveImageUrl(product: Product): string {
     return `${HOSTINGER_DOMAIN}/product_images/${cleanPath}`;
   }
 
-  // 2. AUTOMATED FALLBACK: If no image is in the DB, predict the Hostinger URL
-  // Example: Product Name "Fashion Bag" -> looks for "fashion-bag-front.webp"
   if (product.name) {
     const slug = generateProductSlug(product.name);
-    // You can change '-front.webp' to whatever your standard naming convention is
     return `${HOSTINGER_DOMAIN}/product_images/${slug}-front.webp`;
   }
 

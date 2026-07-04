@@ -1,14 +1,19 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Product, resolveImageUrl } from '@/data/shopData';
+import { Product, resolveImageUrl, FALLBACK_IMAGE } from '@/data/shopData';
 
 export default function ShopProductCard({ product }: { product: Product }) {
   const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Initialize state with the resolved URL
+  const [imgSrc, setImgSrc] = useState(resolveImageUrl(product));
 
-  // Use our centralized professional resolver
-const safeImageUrl = resolveImageUrl(product);
+  // If the product prop changes (e.g., during filtering), reset the image source
+  useEffect(() => {
+    setImgSrc(resolveImageUrl(product));
+  }, [product]);
 
   const materialsDisplay = product.materials && product.materials.length > 0 
     ? product.materials.join(', ') 
@@ -22,14 +27,20 @@ const safeImageUrl = resolveImageUrl(product);
           <div className="absolute inset-0 bg-eco-500/5 z-10 group-hover:bg-transparent transition-colors duration-500" />
           
           <Image 
-            src={safeImageUrl} 
+            src={imgSrc} 
             alt={product.name || 'Product'} 
             fill
+            unoptimized={true} // CRITICAL: Bypasses Next.js proxy blocking on Hostinger
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className={`object-cover object-center transition-all duration-700 ease-out group-hover:scale-110 ${
               isLoaded ? 'blur-0 opacity-100' : 'blur-xl opacity-0'
             }`}
             onLoad={() => setIsLoaded(true)}
+            // CRITICAL: If Hostinger returns 404, gracefully swap to the fallback
+            onError={() => {
+              setImgSrc(FALLBACK_IMAGE);
+              setIsLoaded(true);
+            }}
           />
           
           {product.badge && product.badge.trim() !== '' && (
