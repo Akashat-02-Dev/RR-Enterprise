@@ -60,12 +60,6 @@ export default async function ProductDetailsPage({
               <h1 className="font-alegreya text-4xl md:text-6xl font-bold text-eco-500 leading-tight mb-4">
                 {product.name}
               </h1>
-              {product.price && (
-                <div className="text-3xl font-poppins font-semibold text-eco-400 mb-6">
-                  {typeof product.price === 'number' ? `$${product.price.toFixed(2)}` : product.price}
-                  <span className="text-lg text-eco-400/60 font-nunito font-normal ml-2">/ bulk unit</span>
-                </div>
-              )}
             </div>
 
             <div className="h-px w-full bg-eco-500/10 my-6" />
