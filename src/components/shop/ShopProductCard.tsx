@@ -2,28 +2,13 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Product, resolveImageUrl } from '@/data/shopData';
 
-export default function ShopProductCard({ product }: { product: any }) {
+export default function ShopProductCard({ product }: { product: Product }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // 1. Extract the filename
-  const imageFilename = Array.isArray(product.imageUrl) ? product.imageUrl[0] : product.imageUrl;
-  
-  // 2. Safely construct the Hostinger URL to prevent duplicate paths
-  const HOSTINGER_DOMAIN = "https://rnrenterprise.co.in";
-  let safeImageUrl = "https://images.unsplash.com/photo-1611077544831-29002241eec7?auto=format&fit=crop&q=80&w=800"; // Fallback
-
-  if (imageFilename && imageFilename.trim() !== '') {
-    if (imageFilename.startsWith('http')) {
-      // If it's already a complete URL (like an unsplash link in the DB), use it directly
-      safeImageUrl = imageFilename;
-    } else {
-      // Clean up the string to remove any leading slashes or existing 'product_images/' text
-      // This prevents the ".../product_images//product_images/..." error
-      const cleanPath = imageFilename.replace(/^\/?(product_images\/)?/, '');
-      safeImageUrl = `${HOSTINGER_DOMAIN}/product_images/${cleanPath}`;
-    }
-  }
+  // Use our centralized professional resolver
+const safeImageUrl = resolveImageUrl(product);
 
   const materialsDisplay = product.materials && product.materials.length > 0 
     ? product.materials.join(', ') 

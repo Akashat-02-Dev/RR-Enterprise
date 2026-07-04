@@ -5,37 +5,22 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft, CheckCircle2, ShieldCheck, Factory } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { getProductById } from '@/data/shopData';
+import { getProductById, resolveImageUrl } from '@/data/shopData';
 
-// 1. Update the type definition so params is a Promise
 export default async function ProductDetailsPage({ 
   params 
 }: { 
   params: Promise<{ id: string }> 
 }) {
-  // 2. Await the params before accessing the id
   const { id } = await params;
-  
-  // 3. Now safely pass the awaited id to Firebase
   const product = await getProductById(id);
 
   if (!product) {
     notFound();
   }
 
-  const HOSTINGER_DOMAIN = "https://rnrenterprise.co.in"; 
-  const imageFilename = Array.isArray(product.imageUrl) ? product.imageUrl[0] : product.imageUrl;
-  
-  let safeImageUrl = "https://images.unsplash.com/photo-1611077544831-29002241eec7?auto=format&fit=crop&q=80&w=800";
-
-  if (imageFilename && imageFilename.trim() !== '') {
-    if (imageFilename.startsWith('http')) {
-      safeImageUrl = imageFilename;
-    } else {
-      const cleanPath = imageFilename.replace(/^\/?(product_images\/)?/, '');
-      safeImageUrl = `${HOSTINGER_DOMAIN}/product_images/${cleanPath}`;
-    }
-  }
+  // Use our centralized professional resolver
+const safeImageUrl = resolveImageUrl(product);
 
   const materialsDisplay = product.materials && product.materials.length > 0 
     ? product.materials.join(', ') 
@@ -64,7 +49,7 @@ export default async function ProductDetailsPage({
 
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
           
-          {/* Image Section - Glassmorphic Container */}
+          {/* Image Section */}
           <div className="w-full lg:w-1/2 flex-shrink-0">
             <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-square bg-white/40 backdrop-blur-2xl rounded-[3rem] p-4 border border-white/60 shadow-apple">
               <div className="relative w-full h-full overflow-hidden rounded-[2.5rem] bg-eco-200/20">
@@ -134,7 +119,6 @@ export default async function ProductDetailsPage({
               </li>
             </ul>
 
-            {/* CTA Button */}
             <a 
               href="/#contact" 
               className="w-full md:w-auto text-center bg-eco-500 hover:bg-eco-400 text-eco-100 rounded-[2rem] px-10 py-5 font-poppins text-lg font-medium transition-all duration-300 shadow-apple hover:shadow-apple-hover transform hover:-translate-y-1"
